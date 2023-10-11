@@ -1,0 +1,84 @@
+html {
+
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+
+
+}
+
+.all {
+
+    margin-bottom: 200px;
+
+}
+
+h1 {
+
+    margin-left: 15px;
+
+}
+
+ul {
+
+    list-style: none;
+    justify-content: center;
+
+}
+
+body {
+
+    justify-content: center;
+
+}
+
+li {
+
+    padding-bottom: 5px;
+    padding-top: 5px;
+
+}
+
+#addItem {
+
+    width: 180px;
+    padding: 5px;
+
+
+}
+
+#add {
+
+    width: 30px;
+    height: 30px;
+
+}
+
+#check {
+
+    margin-left: -30px;
+
+}
+
+label {
+
+    padding-left: 10px;
+}
+
+#delete {
+
+    position: absolute;
+    margin-left: 140px;
+    margin-top: -25px
+
+}
+
+#search {
+
+    font-size: 14px;
+    width: 210px;
+    padding: 5px;
+    margin-top: 5px
+
+}
