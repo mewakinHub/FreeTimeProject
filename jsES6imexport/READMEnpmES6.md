@@ -35,7 +35,7 @@ In summary, while both NPM and Babel are essential tools in JavaScript developme
 
 4. **Custom Configuration**: Developers can customize Babel's behavior by configuring it through a `.babelrc` file or other means. Babel allows you to specify which transformations or plugins to apply.
 
-*Here are some reasons why Babel is commonly used in web development: *
+*Here are some reasons why Babel is commonly used in web development:*
 
 1. **Cross-Browser Compatibility**: Browsers and JavaScript engines may not support the latest JavaScript features immediately. Babel helps ensure that your code can run on older or less-feature-rich environments by converting modern JavaScript into older versions that are widely supported.
 
