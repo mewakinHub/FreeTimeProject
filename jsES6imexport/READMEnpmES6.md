@@ -1,9 +1,28 @@
 # jsES6import&export (Module, Export & Require)
-1. set up NodeJS and POSTMAN
-2. statrt with create folder and cd to that folder
-3. nmp init (then repeat enter to create package.json)
-4. npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/node (babel is big library)
-babel help you on running on different(older) version of Node JS
+- Download NodeJS and POSTMAN
+### Setup Node.js Project
+- start with create folder and cd to that folder(using Terminal)
+- Run `npm init` to generate project (then repeat enter to create package.json)
+### Setup Babel
+- Run `npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/node` (Babel is big library, take time to download)
+- Create file `.babelrc`
+- Add setting to support ES6 version (just add this to `.babelrc` file) 
+```
+{
+    "presets": ["@babel/preset-env"]
+}
+```
+### Setup build and run command
+- Add build command to generate ES5 & Add start commaand to run simple app, Changing "script" section in `package.json` to be
+```
+ "scripts": {
+    "start": "node dist/main.js",
+    "build": "babel src --out-dir dist"
+  }
+``` 
+*after run the script, it'll create replicated folder as dist for running*
+- Type in Terminal: `npm run build` then `npm run start` to run
+
 
 ### resource
 *PostMan: * [download link](https://www.postman.com/downloads/)
@@ -60,9 +79,14 @@ In summary, Babel is a tool for transpiling modern JavaScript into older version
 
 `inline code`
 
+```
+code block
+```
+
 ==highlight==
 
-#heading
+###heading
 
 ![alt image](http://)
 
+*copy from Github, return Markdown text*
