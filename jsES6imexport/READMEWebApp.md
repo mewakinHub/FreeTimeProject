@@ -36,4 +36,33 @@ In the structure you've described, the CMS (Content Management System) typically
 
 So, the CMS is a critical part of the content creation and management process. Content creators use the CMS to manage the website's content, and the server (Node.js) may interact with the CMS to retrieve content to serve to the client (React.js). The CMS's role is to simplify content management and ensure that the most up-to-date and relevant content is displayed to users.
 
-## proxy
+## proxy 
+
+In the context of communication between a React.js frontend and a Node.js backend, a "proxy" typically refers to a configuration that allows you to route HTTP requests from your React.js application to your Node.js server during development. This is commonly used to overcome cross-origin restrictions that browsers enforce for security reasons.
+
+Here's how it works:
+
+1. **React.js**:
+   - When you develop a React.js application, it's often served by a development server (e.g., using `create-react-app` or another development tool).
+   - This development server runs on a specific port (e.g., `localhost:3000`) and serves your React application.
+
+2. **Node.js (Express.js)**:
+   - Your Node.js server, which may be built using Express.js, runs on a different port (e.g., `localhost:8000`).
+   - This server handles the application's backend logic, including processing HTTP requests from the client (React.js).
+
+3. **Cross-Origin Restrictions**:
+   - Browsers enforce the same-origin policy, which means a web page served from one origin (e.g., `localhost:3000`) is not allowed to make direct HTTP requests to another origin (e.g., `localhost:8000`) due to security concerns. This can be an issue during development.
+
+4. **Proxy Configuration**:
+   - To solve this issue during development, you can set up a proxy configuration in your React.js project (e.g., by modifying the `package.json` file).
+   - This proxy configuration tells the React development server to route specific requests (e.g., requests to `/api/*`) to your Node.js server (e.g., `localhost:8000`).
+
+By using this proxy configuration, you can develop your React.js frontend and make API requests to the Node.js backend as if they are part of the same origin, even though they are running on different ports during development.
+
+Here's an example of how the `package.json` file might be configured to set up a proxy:
+
+```json
+"proxy": "http://localhost:8000"
+```
+
+With this setup, if your React component makes a request to `/api/some-endpoint`, the React development server will proxy that request to your Node.js server running at `http://localhost:8000/api/some-endpoint`. This helps you avoid cross-origin issues while developing your application.

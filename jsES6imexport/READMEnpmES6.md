@@ -21,6 +21,7 @@
   }
 ``` 
 *after run the script, it'll create replicated folder as dist for running*
+** from folder src to replicated as dist folder for running only **
 - Type in Terminal: `npm run build` then `npm run start` to run
 
 
