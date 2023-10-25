@@ -1,4 +1,4 @@
-### terminal command
+### terminal command (emitter import export)
 1. ``cd ..`` to access back to the Freetime Project directory
 2. ``mkdir event-emitter`` to create the folder
 3. ``cd event-emitter`` to access to that directory
