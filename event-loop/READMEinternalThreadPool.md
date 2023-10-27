@@ -24,8 +24,9 @@ processFileContents('largefile.txt');
 ```
 
 In this code, the `fs.readFileSync` method is used for synchronous file reading. This operation will block the main thread until the entire file is read and processed, making your application unresponsive during that time.
+(it's should be async to non-blocking, but in some case, we may need to make it sync, so that's why we need to usse internal thread pool)
 
-**Code Example With Internal Thread Pool:**
+**Code Example With Internal Thread Pool(ES6):**
 
 ```javascript (ES6)
 import { readFileSync } from 'fs';
@@ -69,3 +70,34 @@ In this code, we've used the Node.js `worker_threads` module to create a separat
 Using an internal thread pool in this way ensures that the main thread doesn't get blocked by the blocking I/O operation, making your application more responsive and capable of handling other tasks concurrently.
 
 Please note that this is a simplified example, and in a real project, you might use higher-level libraries or frameworks to manage these operations more efficiently.
+
+### *blocking I/O operation*
+Blocking I/O operations can indeed block the main thread and the event loop. Let me clarify this in more detail:
+
+1. **Blocking the Main Thread**: When a blocking I/O operation occurs, it prevents the main thread from executing any other code. It halts the execution of JavaScript on the main thread, causing it to wait until the I/O operation is complete.
+
+2. **Blocking the Event Loop**: The event loop in Node.js is responsible for handling asynchronous operations. When a blocking I/O operation is executed synchronously, it blocks the event loop as well because the event loop is unable to process other tasks while waiting for the blocking operation to finish.
+
+So, if you execute a blocking I/O operation directly on the main thread in a Node.js application, it can block both the main thread and the event loop, leading to decreased responsiveness and concurrency. This can be problematic in applications that need to handle multiple tasks concurrently.
+
+To address this, you can use asynchronous methods and non-blocking I/O. Instead of running the I/O operation synchronously, you can use `asynchronous` methods that allow the main thread and the event loop to continue processing other tasks while the I/O operation runs in the background. When the I/O operation is complete, its callback is placed in the event queue, and the event loop handles it, ensuring that the main thread remains non-blocking and responsive.
+
+However, in some cases, you might have legacy code or situations where you must work with blocking I/O operations. In these cases, using an `internal thread pool` can help offload the blocking operation to a separate thread, ensuring that the main thread and event loop remain responsive. This is a way to mitigate the blocking nature of certain operations, even when they must be executed synchronously.
+
+#### existing case(real application)
+
+There are cases where you might have a legitimate need to use a blocking (synchronous) I/O function instead of making it asynchronous. Here are some common scenarios:
+
+1. **Legacy Code**: In existing codebases, you might encounter older modules or libraries that rely on synchronous I/O operations. Transitioning such code to use asynchronous I/O can be time-consuming and complex.
+
+2. **System-Level Operations**: Some operations at the system level or in specific environments might require synchronous I/O. For example, certain configurations and drivers might only support synchronous operations.
+
+3. **Synchronization Requirements**: In some situations, you might need to ensure that certain operations happen in a specific order, and synchronous I/O can simplify this. For example, if you need to read a configuration file before proceeding with other tasks, using synchronous I/O guarantees that the data is available when you need it.
+
+4. **Simplicity**: Synchronous I/O can be simpler to implement and reason about in certain scenarios. Asynchronous code often involves handling callbacks or promises, which can make the code more complex.
+
+However, even in cases where synchronous I/O is necessary, you should be cautious and consider the impact on your application's responsiveness. To mitigate the blocking nature of synchronous operations, you can use techniques like offloading the synchronous work to a separate thread or process using an internal thread pool. This ensures that the main thread and event loop remain responsive.
+
+Node.js provides the `worker_threads` module for creating worker threads to handle synchronous operations, allowing you to manage these operations more effectively without blocking the main thread.
+
+In summary, there are scenarios where synchronous I/O may be necessary due to legacy code, specific system requirements, synchronization needs, or code simplicity. However, it's essential to be aware of the potential drawbacks and use techniques to minimize the impact on your application's responsiveness when working with blocking I/O operations.
