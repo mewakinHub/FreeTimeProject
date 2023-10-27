@@ -1,74 +1,44 @@
-# Let's start with callbacks and then discuss how to convert a callback-based function to a Promise-based one. We'll also cover `async` and `await` in the process.
+In JavaScript, functions can be classified into three main categories related to asynchronous behavior:
 
-**Callbacks:**
+1. **Synchronous Functions**: These are standard functions that execute sequentially from top to bottom. They don't involve asynchronous operations like timers, network requests, or file I/O.
 
-In JavaScript, a callback is a function that is passed as an argument to another function and is executed after the completion of that function. Callbacks are often used in asynchronous operations, such as reading a file, making an HTTP request, or handling events.
+2. **Asynchronous Functions (Promise-based)**: These functions return Promises, and they typically involve asynchronous operations. You can use the `.then()` method to handle the results when the asynchronous operation is complete. Here's an example:
 
-Here's a simple example of a callback function used in a setTimeout:
+    ```javascript
+    function asyncFunction() {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve('Async operation complete');
+        }, 1000);
+      });
+    }
 
-```javascript
-function sayHello() {
-  console.log("Hello, callback!");
-}
+    asyncFunction().then(result => {
+      console.log(result);
+    });
+    ```
 
-setTimeout(sayHello, 1000); // "sayHello" is the callback function
-```
+3. **Asynchronous Functions (async/await)**: These functions use the `async` keyword to indicate that they contain asynchronous operations. They can use the `await` keyword to pause the execution until an asynchronous operation is complete. They are typically easier to read and write than Promise-based code. Here's an example:
 
-In the example above, `sayHello` is a callback function passed to `setTimeout`. It gets executed after a delay of 1000 milliseconds.
+    ```javascript
+    async function asyncFunction() {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve('Async operation complete');
+        }, 1000);
+      });
+    }
 
-**Promises:**
+    async function executeAsyncFunction() {
+      const result = await asyncFunction();
+      console.log(result);
+    }
 
-Promises are a more structured way to handle asynchronous operations. They represent a value that might be available now, in the future, or never. Promises have three states: pending, fulfilled (resolved), and rejected.
+    executeAsyncFunction();
+    ```
 
-Here's how you can convert a callback-based function to a Promise-based one:
+In the third category (asynchronous functions with `async/await`), the `async` keyword is used to declare that the function may contain `await` expressions. The `await` keyword, when used within an `async` function, pauses the function's execution until the Promise is resolved or rejected.
 
-Suppose you have a callback-based function like this:
+By using `async` and `await`, you can write asynchronous code in a more sequential and readable manner, as it closely resembles the structure of synchronous code. This makes it easier to manage and reason about complex asynchronous flows.
 
-```javascript
-function fetchData(callback) {
-  // Simulate fetching data asynchronously
-  setTimeout(() => {
-    const data = "Data from the server";
-    callback(data);
-  }, 2000);
-}
-```
-
-You can convert it to a Promise-based function like this:
-
-```javascript
-function fetchData() {
-  return new Promise((resolve, reject) => {
-    // Simulate fetching data asynchronously
-    setTimeout(() => {
-      const data = "Data from the server";
-      resolve(data);
-    }, 2000);
-  });
-}
-```
-
-Now, you can use the `fetchData` function with Promises and the `async` and `await` syntax:
-
-```javascript
-async function fetchDataAndLog() {
-  try {
-    const data = await fetchData();
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-fetchDataAndLog();
-```
-
-In the example above, `fetchData` returns a Promise. You can use `await` to pause the execution until the Promise is resolved or rejected.
-
-Here's a breakdown of the terms:
-
-- `async`: When you mark a function as `async`, it means it will always return a Promise. You can use the `await` keyword inside an `async` function to pause its execution until the awaited Promise is settled (resolved or rejected).
-
-- `await`: The `await` keyword can only be used inside an `async` function. It's used to pause the execution of the function until the awaited Promise is settled. You can then get the result or handle any potential errors using `try...catch`.
-
-With this information, you should have a good foundation for understanding and working with callbacks, Promises, `async`, and `await` in JavaScript.
+To classify a function as asynchronous with `async/await`, you should declare the function using the `async` keyword and use the `await` keyword within the function to handle asynchronous tasks. In contrast, Promise-based asynchronous functions return Promises, and you use `.then()` and `.catch()` to handle results and errors.

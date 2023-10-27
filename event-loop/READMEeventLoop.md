@@ -25,7 +25,7 @@ event-driven system:
 2 scenarios:
 
 - When an I/O operation is non-blocking (e.g., asynchronous file read), it is typically handled directly by the event loop without blocking the main thread. The event loop can continue processing other events while waiting for the I/O operation to complete.
-  - single thread (`setTimeout` function)
+  - single thread [eg.)`setTimeout` or dbqueries function]
 
 - When an I/O operation is blocking (e.g., synchronous database query), it can potentially block the main thread, which is not desirable in an event-driven system. To avoid this, some systems, like Node.js, use an `internal thread pool` to `offload` these blocking operations to worker threads, allowing the main thread to remain responsive to other tasks.
   - multi-thread
@@ -54,10 +54,37 @@ The primary goal is to keep the main thread available to handle non-blocking tas
 
 <br/>
 
-To understand these concepts better, you can start with some practical examples and tutorials in the programming languages or platforms you're most interested in. Here's a simple breakdown:
+### distinction between asynchronous file I/O and synchronous operations, along with an example:
 
-- If you're interested in web development, learn about JavaScript's event loop, which is crucial for handling asynchronous operations in web applications.
-- For server-side development, explore Node.js and its event-driven, non-blocking I/O model.
-- To delve into concurrent systems and threading, pick a programming language like Java or Python and study how thread pools are implemented and used.
+1. **Asynchronous File I/O:** I've chosen to use `setInterval` for handling asynchronous file I/O operations. This approach is well-suited for tasks like writing data to a file at regular intervals without blocking the event loop.
 
-As an intern or junior developer, practical experience and hands-on coding are essential for a deep understanding of these concepts. Seek out internships or projects that allow you to work with these technologies to gain real-world experience. Additionally, books and online courses on these subjects can provide structured learning and valuable insights into best practices.
+2. **Non-Blocking Advantage:** The use of `setInterval` ensures that these file I/O operations don't block other asynchronous tasks, allowing them to proceed in parallel.
+
+3. **Consideration for Synchronous Tasks:** If the scenario involved synchronous operations or required different looping conditions, a `while` loop might have been a more appropriate choice.
+
+**Example:** Think of a situation where you need to periodically log system data to a file. Using `setInterval` in this case ensures uninterrupted system monitoring without hindering other processes.
+
+### Event-loop modified
+
+[](https://chat.openai.com/c/4b361958-f1d1-4870-812f-840c5d7a2ad8)
+
+Async(Non blocking I/O) go to LibUV for [executing??], then go to event queue for queuing to callback like other normal function in  V8 engine [call stack)
+
+- But Normal V8 engine[call stack tracks execution of function in main thread] running is from above to the below line, but if found fn. It’s have to put it into LibUV first before go to the next one
+
+### NEED TO MAKE HANDS-ON PROJECT FOR REAL UNDERSTANDING!!!!
+
+The V8 engine is an open-source, high-performance JavaScript engine developed by Google. It is written in C++ and is used primarily in Google Chrome and Node.js, but it can also be embedded in other applications.
+
+Key features and characteristics of the V8 engine include:
+
+1. **Just-In-Time (JIT) Compilation**: V8 uses a Just-In-Time compiler to translate JavaScript code into optimized machine code, which improves the execution speed of JavaScript programs.
+2. **Single-Threaded Event Loop**: V8 is single-threaded and uses an event loop to manage asynchronous operations, which allows it to handle multiple tasks concurrently without blocking.
+3. **Memory Management**: V8 employs a garbage collector to manage memory allocation and deallocation for JavaScript objects. It automatically reclaims memory that is no longer in use, reducing the risk of memory leaks.
+4. **ECMAScript Compatibility**: V8 adheres to the ECMAScript standards, making it compatible with JavaScript specifications and ensuring consistent behavior across different environments.
+5. **Embeddable**: V8 can be embedded in other C++ applications, allowing developers to extend applications with JavaScript scripting capabilities.
+6. **Optimizations**: V8 applies various optimizations to JavaScript code, including inlining functions, optimizing property access, and using hidden classes to improve performance.
+7. **Node.js Integration**: V8 is the JavaScript engine that powers Node.js, making it a popular choice for building scalable server-side applications.
+8. **Open Source**: V8 is open-source, and its development is driven by contributions from the open-source community.
+
+V8's speed and efficiency are attributed to its innovative design and continuous optimization. It has played a significant role in the performance improvements seen in modern web browsers and server-side JavaScript environments like Node.js. The engine's ability to efficiently execute JavaScript code has made it a critical component in the success of web applications and the adoption of server-side JavaScript.
