@@ -101,3 +101,23 @@ However, even in cases where synchronous I/O is necessary, you should be cautiou
 Node.js provides the `worker_threads` module for creating worker threads to handle synchronous operations, allowing you to manage these operations more effectively without blocking the main thread.
 
 In summary, there are scenarios where synchronous I/O may be necessary due to legacy code, specific system requirements, synchronization needs, or code simplicity. However, it's essential to be aware of the potential drawbacks and use techniques to minimize the impact on your application's responsiveness when working with blocking I/O operations.
+
+
+#### worker_threads module
+The `worker_threads` module is a built-in module in Node.js, and it's not a separate library. Node.js includes this module for creating and managing worker threads, which allows you to execute JavaScript code in separate threads or processes. This module is part of the Node.js core, so you can use it without needing to install any additional packages.
+
+The use of worker threads to run code in separate threads is a common practice in Node.js, especially in real-world job scenarios. It's a technique employed to make Node.js applications more efficient, take advantage of multi-core processors, and handle tasks that can be parallelized.
+
+In Node.js, the event loop is single-threaded, so it's well-suited for handling I/O operations and asynchronous tasks. However, there are situations where you want to perform CPU-bound or blocking tasks without affecting the responsiveness of your application. Worker threads are a valuable tool in these cases.
+
+Common use cases for worker threads in Node.js include:
+
+1. Parallelizing CPU-Intensive Tasks: If you have CPU-bound tasks that can be parallelized, you can use worker threads to distribute the workload across multiple CPU cores, improving performance.
+
+2. Handling Blocking I/O: As discussed earlier, you can offload blocking I/O operations to worker threads to prevent the main thread from blocking.
+
+3. Running Computation-Intensive Algorithms: For tasks that involve complex calculations or algorithms, you can use worker threads to run them concurrently.
+
+4. Running Background Tasks: Some applications require background tasks, like data processing or periodic cleanup, which can be executed in separate threads to avoid interfering with the main application logic.
+
+Worker threads can significantly enhance the performance and responsiveness of Node.js applications, and they are a valuable tool to have in your toolkit when working with complex or resource-intensive applications.
