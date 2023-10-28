@@ -1,2 +1,2 @@
-# FreeTimeProject
- back-end, DBMS stuff, Async & Await, Promise based function, how it's work between React and Node
+# WebApp understanding
+- eg.) how the event loop works, blocking I/O operation, DB queries, etc.
