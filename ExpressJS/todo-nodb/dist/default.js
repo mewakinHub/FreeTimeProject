@@ -4,7 +4,8 @@ var _express = _interopRequireDefault(require("express"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 // init app
 var app = (0, _express["default"])();
-// create path and sned something
+
+// create path and send something
 app.get('/test-express', function (request, response) {
   // response.send("Hello ExpressJS learner")
   response.json({

@@ -5,6 +5,7 @@
 4. ``code .`` to open this folder on VScode
 5. set up NPM again ``npm init``
 6. `npm install express` install express framework
+- install body parser `npm install body-parser` for break down GET/POST data to components
 7. `` npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/node `` install babel to transplier older version
 - Create file `.babelrc`
 - Add setting to support ES6 version (just add this to `.babelrc` file) 
