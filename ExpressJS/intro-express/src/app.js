@@ -1,17 +1,28 @@
-import express from 'express';
+import express, { request } from 'express';
 // init app
 const app = express();
-// create path and sned something
-app.get('/test-express', (request, response)=>{
-    // response.send("Hello ExpressJS learner")
-    response.json({
-        name: 'Mew',
-        position: "Software engineer",
-        company: "Data Wow"
-    });
-});
+/**
+ * TODO
+ * create todo
+ * update todo by id
+ * delete todo by id
+ * get todo by id
+ */
+
+/**
+ * id
+ * status = complete, in-progress, canceled
+ * name
+ */
+
+const todoList = [];
+
+app.post('/todos', (request,response)=>{
+    response.send('Post todo')
+})
 
 //open port: 3000 (listen)
-app.listen(3000, ()=>{
-    console.log('http://localhost:3000/test-express');
+app.listen(3000, ()=>{  
+    console.log('http://localhost:3000/');
 });
+
