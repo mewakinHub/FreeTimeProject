@@ -181,3 +181,19 @@ A REST API, or Representational State Transfer Application Programming Interface
 
 REST APIs are widely used for building web services and APIs because of their simplicity and scalability. They are commonly used for web applications, mobile apps, and any system where different software components need to communicate over a network. RESTful principles make it easier for developers to create, maintain, and consume APIs, and they align well with the HTTP protocol, making it a popular choice for building web services.
 
+The HTTP methods in REST API, such as GET, POST, PATCH, DELETE, and PUT, have specific meanings and purposes. While it's technically possible to implement a function for one method that mimics the behavior of another, it's not a recommended practice because it violates the principles of the REST architecture. Each HTTP method should be used as intended for clear and predictable interactions between clients and servers. Here's a brief overview of these methods:
+
+1. **GET:** This method is used to retrieve data from a server. It should not have side effects on the server and is typically read-only. It's used for retrieving resources or data from a specific URL.
+
+2. **POST:** POST is used to submit data to be processed to a specified resource. It often results in the creation of a new resource on the server. It should not be used for idempotent operations (repeated requests should not have additional side effects).
+
+3. **PUT:** PUT is used to update or replace an existing resource with the new representation sent in the request. It's idempotent, meaning repeated requests have the same result as the first request.
+
+4. **PATCH:** PATCH is used to apply partial modifications to a resource. It's used when you want to update specific fields of a resource without modifying the entire resource. It's also idempotent.
+
+5. **DELETE:** DELETE is used to request the removal of a resource from the server.
+
+The main reason for adhering to these methods' intended use is to ensure the API is self-descriptive and follows the RESTful principles, making it predictable and easier for developers to understand. It also helps with caching, security, and compatibility with HTTP standards. Violating these conventions can lead to confusion and unexpected behavior.
+
+While it's technically possible to implement a POST method to perform a DELETE operation, doing so goes against the expected behavior and can make the API less predictable and more challenging to work with for other developers. It's generally better to follow the standard HTTP methods for their intended purposes to maintain a clean and well-structured REST API.
+

@@ -1,5 +1,5 @@
 ![Alt text](software_stack.png)
-
+![Alt text](Node_architecture.png)
 1. **REST API as a Bridge:**
    - Yes, a REST API typically acts as a bridge between the front end and the back end in modern web applications. It provides a standardized way for the front end (in your case, React) to communicate with the back end (Node.js with Express) by defining a set of endpoints (routes) for performing various operations (GET, POST, PUT, DELETE).
 
