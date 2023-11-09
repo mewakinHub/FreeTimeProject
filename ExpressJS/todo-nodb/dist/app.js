@@ -72,13 +72,13 @@ app.patch('/todos/:id', function (request, response) {
     response.status(404).send("Todo not found");
     return;
   }
-  // merge
+  // merge (using destructuring ...)
   todoList[todoIndex] = _objectSpread(_objectSpread({}, todoList[todoIndex]), request.body);
   // status 200 ok
   response.send(todoList[todoIndex]);
 });
 
-// PUT: replace todo
+// PUT: overwrite todo
 app.put('/todos/:id', function (request, response) {
   // index of todoList array
   var todoIndex = todoList.findIndex(function (todo) {
